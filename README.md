@@ -5,7 +5,7 @@
 
 使用Golang开发的PayJS SDK，简单、易用。
 
-[PayJS](https://payjs.cn/ref/DWPXBZ)是微信支付个人接口解决方案，感兴趣的可以去官网看下。
+[PayJS](https://payjs.cn/ref/DWPXBZ)是支付宝与微信支付个人接口解决方案，感兴趣的可以去官网看下。
 
 这里是SDK的演示地址：[https://payjs.qingwuguo.com](https://payjs.qingwuguo.com)
 
@@ -71,6 +71,7 @@ type Request struct {
     Body         string `json:"body"`            //N	订单标题
     Attach       string `json:"attach"`          //N	用户自定义数据，在notify的时候会原样返回
     OutTradeNo   string `json:"out_trade_no"`    //Y	用户端自主生成的订单号
+    Type         string `json:"type"`            //N	留空表示微信支付。支付宝交易传值：alipay
 }
 type Response struct {
     ReturnCode   int    `json:"return_code"`    //Y	1:请求成功，0:请求失败
@@ -85,7 +86,7 @@ type Response struct {
     Sign         string `json:"sign"`           //Y	数据签名 详见签名算法
 }
 PayNative := Pay.GetNative()
-Response, err := PayNative.Create(Request.TotalFee, Request.Body, Request.OutTradeNo, Request.Attach)
+Response, err := PayNative.Create(Request.TotalFee, Request.Body, Request.OutTradeNo, Request.Attach, Request.Type)
 ```
 
 官方文档：[扫码支付
